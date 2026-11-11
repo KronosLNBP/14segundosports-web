@@ -38,9 +38,12 @@ borrador: true           # opcional: no se publica
 Texto en Markdown. Embeds en su propia línea: {{youtube ID}}  {{tiktok URL}}
 ```
 
+## Hosting
+Cloudflare Pages, plan gratuito (`wrangler.toml`). Límite: 500 builds al mes; cada push a cualquier rama cuenta como uno. Agrupa cambios en commits en lugar de muchos pushes pequeños.
+
 ## Workflow de publicación
 1. Cada cambio de contenido va en una **rama nueva** (`nota/slug`, `datos/fecha`, `picks/fecha`) y un **Pull Request**.
-2. Corre el build antes de subir. El PR genera vista previa (Vercel); una persona la revisa.
+2. Corre el build antes de subir. Cloudflare Pages genera un link de vista previa por rama; una persona la revisa.
 3. Al hacer merge a `main`, se publica solo en el sitio.
 4. Cambios de diseño o código: también por PR, con capturas de escritorio y móvil.
 

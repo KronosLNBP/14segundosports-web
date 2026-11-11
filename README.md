@@ -4,6 +4,7 @@ Sitio de **14 Segundos Sports** (14segundosports.com.mx): noticias, juegos, cale
 
 - Sin dependencias: `node scripts/build.mjs` genera `dist/`, `node scripts/serve.mjs` lo sirve en local.
 - Contenido en `content/` (Markdown) y `data/` (JSON).
+- Hosting: Cloudflare Pages (gratis). Build: `node scripts/build.mjs`, salida: `dist`.
 - Publicación: Pull Request → vista previa → merge a `main` → en línea.
 
 Guía completa de estructura, formato de notas y reglas editoriales: [CLAUDE.md](CLAUDE.md).
