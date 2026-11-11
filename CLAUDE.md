@@ -38,9 +38,13 @@ borrador: true           # opcional: no se publica
 Texto en Markdown. Embeds en su propia línea: {{youtube ID}}  {{tiktok URL}}
 ```
 
+## Hosting
+GitHub Pages con GitHub Actions (`.github/workflows/pages.yml`): cada push a `main` construye y publica. Los PR solo corren la revisión del build (`build.yml`).
+En Settings → Pages → Source: "GitHub Actions". Sin dominio propio, el build usa `BASE_PATH` (/nombre-repo) automáticamente; no escribas rutas con el nombre del repo a mano, usa siempre rutas que empiecen con `/`.
+
 ## Workflow de publicación
 1. Cada cambio de contenido va en una **rama nueva** (`nota/slug`, `datos/fecha`, `picks/fecha`) y un **Pull Request**.
-2. Corre el build antes de subir. El PR genera vista previa (Vercel); una persona la revisa.
+2. Corre el build antes de subir (y `node scripts/serve.mjs` para revisar). Una persona revisa el PR.
 3. Al hacer merge a `main`, se publica solo en el sitio.
 4. Cambios de diseño o código: también por PR, con capturas de escritorio y móvil.
 

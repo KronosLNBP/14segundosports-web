@@ -6,6 +6,9 @@ import { fileURLToPath } from 'node:url';
 import { markdown, parseFrontmatter, escapeHtml as e } from './lib/markdown.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+// Prefijo de ruta: vacío con dominio propio; "/nombre-repo" si se sirve en usuario.github.io/nombre-repo
+const BASE = (process.env.BASE_PATH || '').replace(/\/$/, '');
+const conBase = (html) => (BASE ? html.replace(/(href|src|action)="\/(?!\/)/g, `$1="${BASE}/`) : html);
 const DIST = path.join(ROOT, 'dist');
 const readJSON = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
 
@@ -94,7 +97,7 @@ const groupBy = (arr, fn) => arr.reduce((acc, x) => ((acc[fn(x)] ||= []).push(x)
 function escribir(ruta, html) {
   const file = path.join(DIST, ruta.replace(/^\//, ''), ruta.endsWith('/') ? 'index.html' : '');
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, html);
+  fs.writeFileSync(file, conBase(html));
 }
 
 // ---------- Componentes ----------
@@ -502,7 +505,8 @@ for (const p of paginas) {
 }
 
 // 404
-fs.writeFileSync(path.join(DIST, '404.html'), layout({ titulo: 'Página no encontrada', contenido: cabecera('Esta jugada no existe', 'La página que buscas no está. <a href="/">Volver al inicio</a>'), ruta: '/404' }));
+fs.writeFileSync(path.join(DIST, '404.html'), conBase(layout({ titulo: 'Página no encontrada', contenido: cabecera('Esta jugada no existe', 'La página que buscas no está. <a href="/">Volver al inicio</a>'), ruta: '/404' })));
+fs.writeFileSync(path.join(DIST, '.nojekyll'), '');
 
 // Feed RSS + JSON (para automatizar redes: fb-autopost, tiktok-autopilot)
 {
