@@ -131,6 +131,8 @@ function tarjetaNota(n, grande = false) {
   </article>`;
 }
 
+const embedYoutube = (id) => `<div class="embed"><iframe src="https://www.youtube-nocookie.com/embed/${e(id)}" title="Video de YouTube" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe></div>`;
+
 function tarjetaVideo(v) {
   const l = ligaById[v.liga];
   const tipos = { highlight: 'Highlight', resumen: 'Resumen', 'en-vivo': 'En vivo', 'a-fondo': 'A Fondo', retro: 'Retro 14s' };
@@ -143,7 +145,7 @@ function tarjetaVideo(v) {
       <div class="vmedia">${thumb}<span class="play" aria-hidden="true">▶</span><span class="dur">${e(tipos[v.tipo] || v.tipo)}</span></div>
       <h3>${e(v.titulo)}</h3>
     </a>
-    <div class="meta">${badge(v.liga)}<time>${fechaCorta(v.fecha)}</time></div>
+    <div class="meta">${badge(v.liga)}${v.fecha ? `<time>${fechaCorta(v.fecha)}</time>` : ''}</div>
   </article>`;
 }
 
@@ -188,12 +190,20 @@ const chipsLigas = (ids, todas = 'Todas') => `<div class="chips" role="tablist">
   ${ids.map((id) => `<button class="chip" data-filtro="${e(id)}">${e(ligaById[id]?.nombre || id)}</button>`).join('')}
 </div>`;
 
+// Enlaces viejos de WordPress: /?p=ID y /?page_id=ID → URL nueva
+const WP_PAGINAS = { 3796: '/nosotros/', 3847: '/servicios/', 3856: '/ceo/', 3878: '/fiba-3x3/', 3906: '/podcast/', 3981: '/partners/', 4024: '/contacto/', 4060: '/ultimate-basketball-academy/' };
+const redirWP = (() => {
+  const mapa = { ...Object.fromEntries(Object.entries(WP_PAGINAS).map(([k, v]) => ['page_id=' + k, v])) };
+  for (const n of noticias) if (n.wp_id) mapa['p=' + n.wp_id] = urlNota(n);
+  return `<script>(function(){var m=${JSON.stringify(mapa)};var q=location.search.slice(1).split('&');for(var i=0;i<q.length;i++){if(m[q[i]]){location.replace(document.querySelector('link[rel=icon]').href.split('assets/favicon.svg')[0]+m[q[i]].slice(1));return;}}})();</script>`;
+})();
+
 // ---------- Layout ----------
 function layout({ titulo, descripcion, contenido, ruta = '/', clase = '' }) {
   const t = titulo ? `${titulo} | ${site.nombre}` : `${site.nombre} · ${site.lema}`;
   const ticker = juegosData.juegos
-    .filter((j) => j.fecha >= '0000')
-    .sort((a, b) => (a.estado === 'en-vivo' ? -1 : b.estado === 'en-vivo' ? 1 : a.fecha.localeCompare(b.fecha)))
+    .slice()
+    .sort((a, b) => (a.estado === 'en-vivo' ? -1 : b.estado === 'en-vivo' ? 1 : b.fecha.localeCompare(a.fecha)))
     .slice(0, 12)
     .map((j) => marcador(j, true)).join('');
   const activo = (u) => (ruta.startsWith(u) ? ' class="on"' : '');
@@ -218,10 +228,10 @@ function layout({ titulo, descripcion, contenido, ruta = '/', clase = '' }) {
 </head>
 <body class="${clase}">
 <a class="skip" href="#contenido">Saltar al contenido</a>
-<div class="ticker" aria-label="Marcadores">
+${ticker ? `<div class="ticker" aria-label="Marcadores">
   <a class="ticker-tit" href="/juegos/">Juegos</a>
   <div class="ticker-row">${ticker}</div>
-</div>
+</div>` : ''}
 <header class="top">
   <div class="wrap top-in">
     <a class="logo" href="/" aria-label="${e(site.nombre)}, inicio"><span class="reloj">14</span><span class="lt">SEGUNDOS<small>SPORTS</small></span></a>
@@ -246,7 +256,7 @@ ${contenido}
     <p class="legal">© ${new Date().getFullYear()} ${e(site.nombre)}. ${e(site.lema)}.</p>
   </div>
 </footer>
-<script src="/assets/main.js" defer></script>
+${ruta === '/' ? redirWP : ''}<script src="/assets/main.js" defer></script>
 </body>
 </html>`;
 }
@@ -271,6 +281,7 @@ fs.cpSync(path.join(ROOT, 'public'), DIST, { recursive: true });
   const tendencias = videosData.videos.filter((v) => v.tipo === 'highlight').slice(0, 4);
   const resumenes = videosData.videos.filter((v) => v.tipo === 'resumen').slice(0, 4);
   const tablaLnbp = posicionesData.tablas.find((t) => t.liga === 'lnbp') || posicionesData.tablas[0];
+  const recientes = juegosData.juegos.filter((j) => j.estado === 'final').sort((a, b) => b.fecha.localeCompare(a.fecha)).slice(0, 4);
   const lideresLnbp = lideresData.categorias.filter((c) => c.liga === 'lnbp').slice(0, 3);
   const picksHoy = picksData.picks.filter((p) => p.resultado === 'pendiente').slice(0, 3);
   const rec = recordPicks();
@@ -290,15 +301,16 @@ fs.cpSync(path.join(ROOT, 'public'), DIST, { recursive: true });
     </aside>
   </section>
 
-  ${seccion('Tendencias', `<div class="grid4">${tendencias.map(tarjetaVideo).join('')}</div>`, '/ver/')}
+  ${tendencias.length ? seccion('Tendencias', `<div class="grid4">${tendencias.map(tarjetaVideo).join('')}</div>`, '/ver/') : ''}
 
   <div class="dos">
     <div>
-      ${seccion('Últimas noticias', `<div class="lista">${titulares.slice(0, 6).map((n) => tarjetaNota(n)).join('')}</div>`, '/noticias/')}
+      ${titulares.length ? seccion('Últimas noticias', `<div class="lista">${titulares.slice(0, 6).map((n) => tarjetaNota(n)).join('')}</div>`, '/noticias/') : ''}
     </div>
     <aside>
-      ${seccion(`Posiciones ${e(ligaById[tablaLnbp.liga]?.nombre || '')}`, tablaPosiciones(tablaLnbp, 5), '/posiciones/')}
-      ${seccion('Líderes', `<div class="lideres">${lideresLnbp.map(bloqueLideres).join('')}</div>`, '/estadisticas/')}
+      ${recientes.length ? seccion('Resultados', `<div class="scores col">${recientes.map((j) => marcador(j)).join('')}</div>`, '/juegos/') : ''}
+      ${tablaLnbp ? seccion(`Posiciones ${e(ligaById[tablaLnbp.liga]?.nombre || '')}`, tablaPosiciones(tablaLnbp, 5), '/posiciones/') : ''}
+      ${lideresLnbp.length ? seccion('Líderes', `<div class="lideres">${lideresLnbp.map(bloqueLideres).join('')}</div>`, '/estadisticas/') : ''}
     </aside>
   </div>
 
@@ -306,13 +318,13 @@ fs.cpSync(path.join(ROOT, 'public'), DIST, { recursive: true });
 
   <div class="dos">
     <div>
-      ${seccion('Picks de la jornada', `
-        <div class="record"><div><b>${rec.ganado}-${rec.perdido}${rec.push ? '-' + rec.push : ''}</b><span>Récord</span></div><div><b>${rec.pct}%</b><span>Acierto</span></div><div><b>${rec.unidades >= 0 ? '+' : ''}${rec.unidades.toFixed(2)}</b><span>Unidades</span></div></div>
-        <div class="picks">${picksHoy.map(pickCard).join('') || '<p>No hay picks para hoy.</p>'}</div>
-        <p class="mayor18">+18 · Juega con responsabilidad</p>`, '/picks/')}
+      ${aFondo ? seccion('Podcast 14 Segundos', embedYoutube(aFondo.youtube), '/podcast/') : ''}
     </div>
     <div>
-      ${seccion('A Fondo con Fer Vargas', aFondo ? tarjetaVideo(aFondo) : '', '/podcast/')}
+      ${picksData.picks.length ? seccion('Picks de la jornada', `
+        <div class="record"><div><b>${rec.ganado}-${rec.perdido}${rec.push ? '-' + rec.push : ''}</b><span>Récord</span></div><div><b>${rec.pct}%</b><span>Acierto</span></div><div><b>${rec.unidades >= 0 ? '+' : ''}${rec.unidades.toFixed(2)}</b><span>Unidades</span></div></div>
+        <div class="picks">${picksHoy.map(pickCard).join('') || '<p>No hay picks para hoy.</p>'}</div>
+        <p class="mayor18">+18 · Juega con responsabilidad</p>`, '/picks/') : ''}
       ${negocio.length ? seccion('Negocio del deporte', negocio.map((n) => tarjetaNota(n)).join(''), '/noticias/') : ''}
     </div>
   </div>
@@ -386,7 +398,7 @@ function pickCard(p) {
         <div class="meta">${badge(n.liga)}${n.categoria ? `<span class="cat">${e(n.categoria)}</span>` : ''}${n.ejemplo ? '<span class="ej">Ejemplo</span>' : ''}</div>
         <h1>${e(n.titulo)}</h1>
         ${n.resumen ? `<p class="bajada">${e(n.resumen)}</p>` : ''}
-        <p class="firma">${e(n.autor || 'Redacción 14 Segundos')} · <time datetime="${n.fecha}">${fechaLarga(n.fecha)}</time></p>
+        <p class="firma">${e(n.autor || 'Redacción 14 Segundos')} · <time datetime="${n.fecha}">${fechaLarga(n.fecha)}</time>${n.fuente ? ` · Fuente: ${e(n.fuente)}` : ''}</p>
       </header>
       ${n.imagen ? `<figure class="portada"><img src="${e(n.imagen)}" alt="${e(n.pie_imagen || '')}">${n.pie_imagen ? `<figcaption>${e(n.pie_imagen)}</figcaption>` : ''}</figure>` : `<div class="ph portada" style="--c:${l?.color || '#ff6b00'}"><span>${e(l?.nombre || n.categoria || '14 Segundos')}</span></div>`}
       <div class="cuerpo">${n.html}</div>
@@ -405,7 +417,7 @@ function pickCard(p) {
 {
   const porLiga = groupBy(lideresData.categorias, (c) => c.liga);
   const contenido = cabecera('Estadísticas', 'Líderes, rachas y comparativas: quién está caliente') + `<div class="wrap">
-    ${Object.entries(porLiga).map(([lg, cs]) => seccion(`Líderes ${e(ligaById[lg]?.nombre || lg)}`, `<div class="lideres">${cs.map(bloqueLideres).join('')}</div>`, `/ligas/${lg}/`)).join('')}
+    ${Object.entries(porLiga).map(([lg, cs]) => seccion(`Líderes ${e(ligaById[lg]?.nombre || lg)}`, `<div class="lideres">${cs.map(bloqueLideres).join('')}</div>`, `/ligas/${lg}/`)).join('') || '<p class="vacio">Muy pronto: líderes estadísticos con datos oficiales de cada liga.</p>'}
   </div>`;
   escribir('/estadisticas/', layout({ titulo: 'Estadísticas', contenido, ruta: '/estadisticas/' }));
 }
@@ -413,7 +425,7 @@ function pickCard(p) {
 // Posiciones
 {
   const contenido = cabecera('Posiciones', 'Tablas de cada liga') + `<div class="wrap">
-    ${posicionesData.tablas.map((t) => seccion(`${e(ligaById[t.liga]?.nombre || t.liga)} <small>${e(t.temporada || '')}</small>`, `<div class="tablas">${tablaPosiciones(t)}</div>`, `/ligas/${t.liga}/`)).join('')}
+    ${posicionesData.tablas.map((t) => seccion(`${e(ligaById[t.liga]?.nombre || t.liga)} <small>${e(t.temporada || '')}</small>`, `<div class="tablas">${tablaPosiciones(t)}</div>`, `/ligas/${t.liga}/`)).join('') || '<p class="vacio">Muy pronto: tablas de posiciones con datos oficiales de cada liga.</p>'}
   </div>`;
   escribir('/posiciones/', layout({ titulo: 'Posiciones', contenido, ruta: '/posiciones/' }));
 }
@@ -458,7 +470,7 @@ function pickCard(p) {
     jugadores.get(k).stats.push(`${j.valor} ${c.abrev}`);
   }
   const contenido = cabecera('Jugadores', 'Fichas y números de los protagonistas') + `<div class="wrap">
-    <div class="buscador"><input type="search" placeholder="Buscar jugador o equipo…" aria-label="Buscar jugador" data-buscar=".jug"></div>
+    ${jugadores.size ? '<div class="buscador"><input type="search" placeholder="Buscar jugador o equipo…" aria-label="Buscar jugador" data-buscar=".jug"></div>' : ''}
     <div class="jugadores">${[...jugadores.values()].map((j) => `<div class="jug"><div class="av">${e(j.nombre.split(' ').map((x) => x[0]).join('').slice(0, 2))}</div><div><b>${e(j.nombre)}</b><span>${e(j.equipo)} · ${e(ligaById[j.liga]?.nombre || '')}</span><small>${e(j.stats.join(' · '))}</small></div></div>`).join('')}</div>
     <p class="vacio">Las fichas completas se generarán con los datos de la app de anotación y de las ligas.</p>
   </div>`;
@@ -473,9 +485,9 @@ function pickCard(p) {
   const permitidas = ligas.filter((l) => l.picks).map((l) => l.nombre).join(', ');
   const contenido = cabecera('Picks', 'Análisis y pronósticos con registro público de resultados') + `<div class="wrap">
     <div class="aviso18"><b>+18</b> Contenido solo para mayores de edad. Los picks son opinión editorial y no garantizan resultados. Apuesta con responsabilidad y solo en casas con permiso de la SEGOB.</div>
-    <div class="record grande"><div><b>${rec.ganado}-${rec.perdido}${rec.push ? '-' + rec.push : ''}</b><span>Récord</span></div><div><b>${rec.pct}%</b><span>Acierto</span></div><div><b>${rec.unidades >= 0 ? '+' : ''}${rec.unidades.toFixed(2)}</b><span>Unidades</span></div></div>
+    ${!picksData.picks.length ? '<p class="vacio">Muy pronto: picks de NBA y G League con su registro público de resultados.</p>' : `<div class="record grande"><div><b>${rec.ganado}-${rec.perdido}${rec.push ? '-' + rec.push : ''}</b><span>Récord</span></div><div><b>${rec.pct}%</b><span>Acierto</span></div><div><b>${rec.unidades >= 0 ? '+' : ''}${rec.unidades.toFixed(2)}</b><span>Unidades</span></div></div>
     ${seccion('Picks de hoy', `<div class="picks">${pend.map(pickCard).join('') || '<p>No hay picks pendientes.</p>'}</div>`)}
-    ${seccion('Historial', `<table class="hist"><thead><tr><th>Fecha</th><th>Liga</th><th class="izq">Partido</th><th class="izq">Pick</th><th>Momio</th><th>Resultado</th></tr></thead><tbody>${hist.map((p) => `<tr class="${p.resultado}"><td>${fechaCorta(p.fecha)}</td><td>${e(ligaById[p.liga]?.nombre || '')}</td><td class="izq">${e(p.partido)}</td><td class="izq">${e(p.pick)}</td><td>${e(p.momio)}</td><td class="res">${e(p.resultado)}</td></tr>`).join('')}</tbody></table>`)}
+    ${seccion('Historial', `<table class="hist"><thead><tr><th>Fecha</th><th>Liga</th><th class="izq">Partido</th><th class="izq">Pick</th><th>Momio</th><th>Resultado</th></tr></thead><tbody>${hist.map((p) => `<tr class="${p.resultado}"><td>${fechaCorta(p.fecha)}</td><td>${e(ligaById[p.liga]?.nombre || '')}</td><td class="izq">${e(p.partido)}</td><td class="izq">${e(p.pick)}</td><td>${e(p.momio)}</td><td class="res">${e(p.resultado)}</td></tr>`).join('')}</tbody></table>`)}`}
     <section class="sec" id="reglas"><div class="sec-h"><h2>Cómo trabajamos</h2></div>
       <ul class="reglas">
         <li>Publicamos picks solo de: <b>${e(permitidas)}</b>. No publicamos picks de ligas donde tenemos relación directa con la competencia.</li>
@@ -492,8 +504,9 @@ function pickCard(p) {
 // A Fondo / Podcast
 {
   const vs = videosData.videos.filter((v) => v.tipo === 'a-fondo' || v.tipo === 'retro');
-  const contenido = cabecera('A Fondo', 'Entrevistas y conversación con Fer Vargas') + `<div class="wrap">
-    <div class="grid3">${vs.map(tarjetaVideo).join('')}</div>
+  const contenido = cabecera('A Fondo', 'Podcast y entrevistas de 14 Segundos con Fer Vargas') + `<div class="wrap">
+    <div class="grid2 podcast">${vs.map((v) => (v.youtube ? embedYoutube(v.youtube) : tarjetaVideo(v))).join('')}</div>
+    <p class="vacio"><a href="https://www.youtube.com/@14segundossports" target="_blank" rel="noopener">Ver todos los episodios en YouTube →</a></p>
   </div>`;
   escribir('/podcast/', layout({ titulo: 'A Fondo · Podcast', contenido, ruta: '/podcast/' }));
 }

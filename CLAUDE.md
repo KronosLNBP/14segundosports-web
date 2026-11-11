@@ -36,7 +36,9 @@ imagen: /img/2026/astros.jpg   # opcional, imágenes en public/img/
 borrador: true           # opcional: no se publica
 ---
 Texto en Markdown. Embeds en su propia línea: {{youtube ID}}  {{tiktok URL}}
+Tablas (box score):  | Equipo | P1 | P2 | ... |  seguida de  |---|---|
 ```
+Campos extra: `fuente:` (p. ej. "Prensa Dorados" cuando es un comunicado), `wp_id:` (id de la nota en el WordPress viejo, para redirigir enlaces antiguos).
 
 ## Hosting
 GitHub Pages con GitHub Actions (`.github/workflows/pages.yml`): cada push a `main` construye y publica. Los PR solo corren la revisión del build (`build.yml`).
@@ -54,6 +56,12 @@ En Settings → Pages → Source: "GitHub Actions". Sin dominio propio, el build
 - Nada de "pick seguro", "ganancia garantizada" ni lenguaje que incite a apostar. Enlaces o patrocinios solo de casas con permiso de la SEGOB, marcados como patrocinados.
 - No copiar notas de otros medios: redactar con palabras propias y citar la fuente. No inventar declaraciones, cifras ni resultados.
 - Contenido con `ejemplo: true` o `"ejemplo": true` es provisional y debe reemplazarse antes del lanzamiento.
+
+## Migración desde WordPress
+- Las 8 notas reales y las páginas se migraron del export (nov 2026). El resto del WordPress era contenido demo de la plantilla.
+- Las imágenes todavía se cargan desde `14segundosports.com.mx/wp-content/...`. Lista completa en `migracion/imagenes-wordpress.txt`: hay que descargarlas a `public/img/` y cambiar las rutas **antes** de apagar el WordPress o apuntar el dominio.
+- Los enlaces viejos `/?p=ID` y `/?page_id=ID` redirigen a las URLs nuevas desde la portada.
+- Posiciones, líderes y picks están vacíos a propósito: solo se llenan con datos oficiales.
 
 ## Automatizaciones previstas
 - `dist/feed.xml` y `dist/api/noticias.json`: los consumen `fb-autopost` y `tiktok-autopilot` para publicar en redes.

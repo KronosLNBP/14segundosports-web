@@ -4,50 +4,120 @@
   "url": "https://14segundosports.com.mx",
   "descripcion": "Noticias, marcadores, estadísticas, highlights y análisis de básquetbol mexicano e internacional, voleibol y fútbol americano colegial.",
   "menu": [
-    { "titulo": "Juegos", "url": "/juegos/" },
-    { "titulo": "Calendario", "url": "/calendario/" },
-    { "titulo": "Ver", "url": "/ver/" },
-    { "titulo": "Noticias", "url": "/noticias/" },
-    { "titulo": "Estadísticas", "url": "/estadisticas/" },
-    { "titulo": "Posiciones", "url": "/posiciones/" },
-    { "titulo": "Ligas", "url": "/ligas/" },
-    { "titulo": "Jugadores", "url": "/jugadores/" },
-    { "titulo": "Picks", "url": "/picks/" },
-    { "titulo": "A Fondo", "url": "/podcast/" }
+    {
+      "titulo": "Juegos",
+      "url": "/juegos/"
+    },
+    {
+      "titulo": "Calendario",
+      "url": "/calendario/"
+    },
+    {
+      "titulo": "Ver",
+      "url": "/ver/"
+    },
+    {
+      "titulo": "Noticias",
+      "url": "/noticias/"
+    },
+    {
+      "titulo": "Estadísticas",
+      "url": "/estadisticas/"
+    },
+    {
+      "titulo": "Posiciones",
+      "url": "/posiciones/"
+    },
+    {
+      "titulo": "Ligas",
+      "url": "/ligas/"
+    },
+    {
+      "titulo": "Jugadores",
+      "url": "/jugadores/"
+    },
+    {
+      "titulo": "Picks",
+      "url": "/picks/"
+    },
+    {
+      "titulo": "A Fondo",
+      "url": "/podcast/"
+    }
   ],
   "pie": [
     {
       "titulo": "14 Segundos",
       "enlaces": [
-        { "titulo": "Nosotros", "url": "/nosotros/" },
-        { "titulo": "Servicios", "url": "/servicios/" },
-        { "titulo": "CEO", "url": "/ceo/" },
-        { "titulo": "Partners", "url": "/partners/" },
-        { "titulo": "Contacto", "url": "/contacto/" }
+        {
+          "titulo": "Nosotros",
+          "url": "/nosotros/"
+        },
+        {
+          "titulo": "Servicios",
+          "url": "/servicios/"
+        },
+        {
+          "titulo": "CEO",
+          "url": "/ceo/"
+        },
+        {
+          "titulo": "Partners",
+          "url": "/partners/"
+        },
+        {
+          "titulo": "Contacto",
+          "url": "/contacto/"
+        }
       ]
     },
     {
       "titulo": "Proyectos",
       "enlaces": [
-        { "titulo": "Liga Catorce Segundos", "url": "/ligas/liga-14-segundos/" },
-        { "titulo": "FIBA 3x3", "url": "/fiba-3x3/" },
-        { "titulo": "Ultimate Basketball Academy", "url": "/ultimate-basketball-academy/" },
-        { "titulo": "Podcast A Fondo", "url": "/podcast/" }
+        {
+          "titulo": "Liga Catorce Segundos",
+          "url": "/ligas/liga-14-segundos/"
+        },
+        {
+          "titulo": "FIBA 3x3",
+          "url": "/fiba-3x3/"
+        },
+        {
+          "titulo": "Ultimate Basketball Academy",
+          "url": "/ultimate-basketball-academy/"
+        },
+        {
+          "titulo": "Podcast A Fondo",
+          "url": "/podcast/"
+        }
       ]
     },
     {
       "titulo": "Juego responsable",
       "enlaces": [
-        { "titulo": "Picks: cómo trabajamos", "url": "/picks/#reglas" },
-        { "titulo": "Aviso de privacidad", "url": "/privacidad/" }
+        {
+          "titulo": "Picks: cómo trabajamos",
+          "url": "/picks/#reglas"
+        },
+        {
+          "titulo": "Aviso de privacidad",
+          "url": "/privacidad/"
+        }
       ]
     }
   ],
   "redes": [
-    { "red": "TikTok", "url": "https://www.tiktok.com/" },
-    { "red": "Instagram", "url": "https://www.instagram.com/" },
-    { "red": "YouTube", "url": "https://www.youtube.com/" },
-    { "red": "Facebook", "url": "https://www.facebook.com/" },
-    { "red": "LinkedIn", "url": "https://www.linkedin.com/" }
+    {
+      "red": "Instagram",
+      "url": "https://www.instagram.com/14segundos_/"
+    },
+    {
+      "red": "TikTok",
+      "url": "https://www.tiktok.com/@14segundossports"
+    },
+    {
+      "red": "YouTube",
+      "url": "https://www.youtube.com/@14segundossports"
+    }
   ]
 }
