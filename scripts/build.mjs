@@ -222,6 +222,9 @@ function layout({ titulo, descripcion, contenido, ruta = '/', clase = '' }) {
 <meta name="theme-color" content="#0b1220">
 <link rel="alternate" type="application/rss+xml" title="${e(site.nombre)}" href="/feed.xml">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:image" content="${site.url}/assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/styles.css">
@@ -234,7 +237,7 @@ ${ticker ? `<div class="ticker" aria-label="Marcadores">
 </div>` : ''}
 <header class="top">
   <div class="wrap top-in">
-    <a class="logo" href="/" aria-label="${e(site.nombre)}, inicio"><span class="reloj">14</span><span class="lt">SEGUNDOS<small>SPORTS</small></span></a>
+    <a class="logo" href="/" aria-label="${e(site.nombre)}, inicio"><img class="logo-img" src="/img/marca/logo-14-blanco.png" alt="14 Segundos Sports" width="137" height="173"><span class="lt">SEGUNDOS<small>SPORTS</small></span></a>
     <button class="burger" aria-label="Menú" aria-expanded="false" aria-controls="menu">☰</button>
     <nav id="menu" class="menu">${site.menu.map((m) => `<a href="${m.url}"${activo(m.url)}>${e(m.titulo)}</a>`).join('')}</nav>
   </div>
@@ -245,7 +248,7 @@ ${contenido}
 <footer class="pie">
   <div class="wrap">
     <div class="pie-top">
-      <a class="logo" href="/"><span class="reloj">14</span><span class="lt">SEGUNDOS<small>SPORTS</small></span></a>
+      <a class="logo" href="/"><img class="logo-img" src="/img/marca/logo-14-blanco.png" alt="14 Segundos Sports" width="137" height="173"><span class="lt">SEGUNDOS<small>SPORTS</small></span></a>
       <div class="redes">${site.redes.map((r) => `<a href="${r.url}" target="_blank" rel="noopener">${e(r.red)}</a>`).join('')}</div>
     </div>
     <div class="pie-cols">
