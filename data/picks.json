@@ -1,11 +1,4 @@
 {
-  "_nota": "DATOS DE EJEMPLO. Reglas: solo ligas con picks:true en ligas.json (NBA, G League; NUNCA LNBP). Cada pick lo aprueba una persona. Registrar TODOS los resultados, incluidos los perdidos.",
-  "ejemplo": true,
-  "picks": [
-    { "id": "2026-11-11-bos-lal", "liga": "nba", "fecha": "2026-11-11", "partido": "Lakers @ Celtics", "pick": "Celtics -4.5", "momio": "-110", "unidades": 1, "resultado": "pendiente", "analisis": "Boston llega descansado y defiende el perímetro mejor que nadie en casa." },
-    { "id": "2026-11-11-gsw-den", "liga": "nba", "fecha": "2026-11-11", "partido": "Warriors @ Nuggets", "pick": "Más de 228.5 puntos", "momio": "-105", "unidades": 1, "resultado": "pendiente", "analisis": "Dos de los ritmos más altos de la conferencia en el último mes." },
-    { "id": "2026-11-09-mil-nyk", "liga": "nba", "fecha": "2026-11-09", "partido": "Bucks @ Knicks", "pick": "Knicks ML", "momio": "-130", "unidades": 1, "resultado": "ganado" },
-    { "id": "2026-11-08-phx-dal", "liga": "nba", "fecha": "2026-11-08", "partido": "Suns @ Mavericks", "pick": "Suns +3", "momio": "-110", "unidades": 1, "resultado": "perdido" },
-    { "id": "2026-11-07-osc-sbl", "liga": "g-league", "fecha": "2026-11-07", "partido": "Osceola @ Sioux Falls", "pick": "Sioux Falls -2", "momio": "-110", "unidades": 1, "resultado": "ganado" }
-  ]
+  "_nota": "Reglas: solo ligas con picks:true en ligas.json (NBA, G League; NUNCA LNBP). Cada pick lo aprueba una persona. Registrar TODOS los resultados. Formato: { \"id\": \"2026-11-20-bos-lal\", \"liga\": \"nba\", \"fecha\": \"2026-11-20\", \"partido\": \"Lakers @ Celtics\", \"pick\": \"Celtics -4.5\", \"momio\": \"-110\", \"unidades\": 1, \"resultado\": \"pendiente|ganado|perdido|push\", \"analisis\": \"\" }",
+  "picks": []
 }

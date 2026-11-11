@@ -75,10 +75,22 @@ export function markdown(src) {
   };
   const flushAll = () => { flushPara(); flushList(); flushQuote(); };
 
-  for (const raw of lines) {
-    const line = raw.trimEnd();
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trimEnd();
     const t = line.trim();
     if (!t) { flushAll(); continue; }
+    // Tabla: | a | b |  seguida de |---|---|
+    if (t.startsWith('|') && /^\|?\s*:?-{3,}/.test((lines[i + 1] || '').trim())) {
+      flushAll();
+      const celdas = (l) => l.trim().replace(/^\||\|$/g, '').split('|').map((c) => c.trim());
+      const head = celdas(t);
+      const filas = [];
+      i += 2;
+      while (i < lines.length && lines[i].trim().startsWith('|')) { filas.push(celdas(lines[i])); i++; }
+      i--;
+      out.push(`<div class="tabla-nota"><table><thead><tr>${head.map((h) => `<th>${inline(h)}</th>`).join('')}</tr></thead><tbody>${filas.map((f) => `<tr>${f.map((c) => `<td>${inline(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`);
+      continue;
+    }
     const e = embed(t);
     if (e) { flushAll(); out.push(e); continue; }
     let m;

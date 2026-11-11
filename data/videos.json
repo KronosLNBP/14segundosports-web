@@ -1,13 +1,10 @@
 {
-  "_nota": "Videos para 'Ver' y portada. tipo: highlight | resumen | en-vivo | a-fondo | retro. youtube = ID del video. EJEMPLO.",
-  "ejemplo": true,
+  "_nota": "tipo: highlight | resumen | en-vivo | a-fondo | retro. youtube = ID del video. Los títulos de los episodios del podcast están pendientes de confirmar.",
   "videos": [
-    { "titulo": "Lo mejor de Astros vs Mineros", "liga": "lnbp", "tipo": "highlight", "fecha": "2026-11-11", "youtube": "" , "tiktok": "" },
-    { "titulo": "Catorce segundos: la jugada de la noche", "liga": "liga-14-segundos", "tipo": "highlight", "fecha": "2026-11-10", "youtube": "" },
-    { "titulo": "Resumen: Lobos se lleva el Juego 1", "liga": "lnbp", "tipo": "resumen", "fecha": "2026-11-11", "youtube": "" },
-    { "titulo": "Highlights ABE · Jornada 5", "liga": "abe", "tipo": "highlight", "fecha": "2026-11-09", "youtube": "" },
-    { "titulo": "ONEFA: las mejores jugadas del fin de semana", "liga": "onefa", "tipo": "highlight", "fecha": "2026-11-09", "youtube": "" },
-    { "titulo": "A Fondo con Fer Vargas · Episodio más reciente", "liga": null, "tipo": "a-fondo", "fecha": "2026-11-08", "youtube": "" },
-    { "titulo": "Retro 14 segundos: la entrevista guardada", "liga": null, "tipo": "retro", "fecha": "2026-11-06", "youtube": "" }
+    { "titulo": "Podcast 14 Segundos", "liga": null, "tipo": "a-fondo", "youtube": "iCMAhGabDF8" },
+    { "titulo": "Podcast 14 Segundos", "liga": null, "tipo": "a-fondo", "youtube": "Wv9sVVOGD-E" },
+    { "titulo": "Podcast 14 Segundos", "liga": null, "tipo": "a-fondo", "youtube": "x4maSh5drAM" },
+    { "titulo": "Podcast 14 Segundos", "liga": null, "tipo": "a-fondo", "youtube": "Q-IAKZRnVLQ" },
+    { "titulo": "Podcast 14 Segundos", "liga": null, "tipo": "a-fondo", "youtube": "KzIHQCLxTG0" }
   ]
 }

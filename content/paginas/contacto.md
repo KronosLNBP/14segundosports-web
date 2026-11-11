@@ -1,8 +1,9 @@
 ---
 titulo: Contacto
-resumen: Escríbenos para coberturas, patrocinios y alianzas.
-ejemplo: true
+resumen: Coberturas, patrocinios y alianzas.
 ---
-*Texto provisional: migrar el contenido de la página actual de WordPress.*
+Escríbenos por nuestras redes sociales:
 
-Escríbenos para coberturas, patrocinios y alianzas.
+- [Instagram @14segundos_](https://www.instagram.com/14segundos_/)
+- [TikTok @14segundossports](https://www.tiktok.com/@14segundossports)
+- [YouTube @14segundossports](https://www.youtube.com/@14segundossports)
