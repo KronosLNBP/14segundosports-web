@@ -1,6 +1,0 @@
-# Cloudflare Pages (plan gratuito). En el panel de Pages:
-#   Comando de build:  node scripts/build.mjs
-#   Carpeta de salida: dist
-name = "14segundosports"
-pages_build_output_dir = "dist"
-compatibility_date = "2026-11-01"
