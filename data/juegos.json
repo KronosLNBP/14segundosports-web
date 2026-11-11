@@ -1,0 +1,14 @@
+{
+  "_nota": "DATOS DE EJEMPLO. Reemplazar con resultados reales (los de la Liga 14 Segundos llegarán de la app de anotación).",
+  "ejemplo": true,
+  "juegos": [
+    { "id": "lnbp-2026-11-11-ast-min", "liga": "lnbp", "fecha": "2026-11-11", "hora": "20:30", "estado": "final", "fase": "Semifinal de zona · Juego 2", "local": { "nombre": "Astros de Jalisco", "abrev": "AST", "puntos": 88 }, "visita": { "nombre": "Mineros de Zacatecas", "abrev": "MIN", "puntos": 81 }, "serie": "AST lidera 2-0" },
+    { "id": "lnbp-2026-11-11-lob-pan", "liga": "lnbp", "fecha": "2026-11-11", "hora": "19:00", "estado": "final", "fase": "Playoffs · Juego 1", "local": { "nombre": "Panteras de Aguascalientes", "abrev": "PAN", "puntos": 74 }, "visita": { "nombre": "Lobos Puebla", "abrev": "LOB", "puntos": 79 }, "serie": "LOB lidera 1-0" },
+    { "id": "lnbp-2026-11-12-sol-abe", "liga": "lnbp", "fecha": "2026-11-12", "hora": "21:00", "estado": "programado", "fase": "Playoffs · Juego 3", "local": { "nombre": "Soles de Mexicali", "abrev": "SOL", "puntos": null }, "visita": { "nombre": "Abejas de León", "abrev": "ABE", "puntos": null }, "serie": "SOL lidera 2-0" },
+    { "id": "nba-2026-11-11-lal-bos", "liga": "nba", "fecha": "2026-11-11", "hora": "18:30", "estado": "en-vivo", "periodo": "3C 04:12", "local": { "nombre": "Boston Celtics", "abrev": "BOS", "puntos": 78 }, "visita": { "nombre": "Los Angeles Lakers", "abrev": "LAL", "puntos": 74 } },
+    { "id": "nba-2026-11-11-gsw-den", "liga": "nba", "fecha": "2026-11-11", "hora": "21:00", "estado": "programado", "local": { "nombre": "Denver Nuggets", "abrev": "DEN", "puntos": null }, "visita": { "nombre": "Golden State Warriors", "abrev": "GSW", "puntos": null } },
+    { "id": "l14-2026-11-12-a-b", "liga": "liga-14-segundos", "fecha": "2026-11-12", "hora": "20:00", "estado": "programado", "fase": "Jornada 8", "local": { "nombre": "Equipo A", "abrev": "EQA", "puntos": null }, "visita": { "nombre": "Equipo B", "abrev": "EQB", "puntos": null } },
+    { "id": "onefa-2026-11-14-x-y", "liga": "onefa", "fecha": "2026-11-14", "hora": "12:00", "estado": "programado", "fase": "Semifinal", "local": { "nombre": "Equipo Local", "abrev": "LOC", "puntos": null }, "visita": { "nombre": "Equipo Visitante", "abrev": "VIS", "puntos": null } },
+    { "id": "voli-2026-11-13-x-y", "liga": "voleibol", "fecha": "2026-11-13", "hora": "19:00", "estado": "programado", "local": { "nombre": "Equipo Local", "abrev": "LOC", "puntos": null }, "visita": { "nombre": "Equipo Visitante", "abrev": "VIS", "puntos": null } }
+  ]
+}

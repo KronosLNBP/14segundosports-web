@@ -1,0 +1,30 @@
+{
+  "_nota": "DATOS DE EJEMPLO. Una tabla por liga; 'grupos' permite zonas o conferencias.",
+  "ejemplo": true,
+  "tablas": [
+    { "liga": "lnbp", "temporada": "2026", "grupos": [
+      { "nombre": "Zona Norte", "equipos": [
+        { "equipo": "Soles de Mexicali", "g": 28, "p": 12 },
+        { "equipo": "Dorados de Chihuahua", "g": 26, "p": 14 },
+        { "equipo": "Fuerza Regia", "g": 24, "p": 16 },
+        { "equipo": "Gambusinos", "g": 19, "p": 21 }
+      ]},
+      { "nombre": "Zona Sur", "equipos": [
+        { "equipo": "Astros de Jalisco", "g": 29, "p": 11 },
+        { "equipo": "Lobos Puebla", "g": 25, "p": 15 },
+        { "equipo": "Abejas de León", "g": 23, "p": 17 },
+        { "equipo": "Mineros de Zacatecas", "g": 22, "p": 18 },
+        { "equipo": "Panteras de Aguascalientes", "g": 20, "p": 20 },
+        { "equipo": "Santos del Potosí", "g": 17, "p": 23 }
+      ]}
+    ]},
+    { "liga": "liga-14-segundos", "temporada": "2026", "grupos": [
+      { "nombre": "General", "equipos": [
+        { "equipo": "Equipo A", "g": 6, "p": 1 },
+        { "equipo": "Equipo B", "g": 5, "p": 2 },
+        { "equipo": "Equipo C", "g": 3, "p": 4 },
+        { "equipo": "Equipo D", "g": 0, "p": 7 }
+      ]}
+    ]}
+  ]
+}

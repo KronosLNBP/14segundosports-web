@@ -1,0 +1,11 @@
+{
+  "name": "14segundosports-web",
+  "private": true,
+  "type": "module",
+  "description": "Sitio de 14 Segundos Sports. Generador estático sin dependencias.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs"
+  },
+  "engines": { "node": ">=18" }
+}

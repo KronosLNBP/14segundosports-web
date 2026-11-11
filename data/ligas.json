@@ -1,0 +1,12 @@
+[
+  { "id": "lnbp", "nombre": "LNBP", "nombreLargo": "Liga Nacional de Baloncesto Profesional", "deporte": "Básquetbol", "color": "#e4002b", "picks": false },
+  { "id": "nba", "nombre": "NBA", "nombreLargo": "National Basketball Association", "deporte": "Básquetbol", "color": "#1d428a", "picks": true },
+  { "id": "g-league", "nombre": "G League", "nombreLargo": "NBA G League", "deporte": "Básquetbol", "color": "#c8102e", "picks": true },
+  { "id": "abe", "nombre": "ABE", "nombreLargo": "Asociación de Baloncesto Estudiantil", "deporte": "Básquetbol", "color": "#0a7d3b", "picks": false },
+  { "id": "liga-14-segundos", "nombre": "Liga 14 Segundos", "nombreLargo": "Liga Catorce Segundos", "deporte": "Básquetbol", "color": "#ff6b00", "picks": false },
+  { "id": "3x3", "nombre": "3x3", "nombreLargo": "Eventos 3x3 Catorce Segundos Sports", "deporte": "Básquetbol 3x3", "color": "#7a3cff", "picks": false },
+  { "id": "ultimate", "nombre": "Ultimate", "nombreLargo": "Juegos Ultimate", "deporte": "Básquetbol", "color": "#111827", "picks": false },
+  { "id": "puebleadas", "nombre": "Puebleadas", "nombreLargo": "Puebleadas (Pinotepa y más)", "deporte": "Básquetbol", "color": "#b45309", "picks": false },
+  { "id": "voleibol", "nombre": "Voleibol", "nombreLargo": "Liga Profesional de Voleibol", "deporte": "Voleibol", "color": "#0891b2", "picks": false },
+  { "id": "onefa", "nombre": "ONEFA", "nombreLargo": "Organización Nacional Estudiantil de Fútbol Americano", "deporte": "Fútbol americano", "color": "#334155", "picks": false }
+]

@@ -1,0 +1,21 @@
+{
+  "_nota": "DATOS DE EJEMPLO. Líderes por liga y categoría (promedio por juego).",
+  "ejemplo": true,
+  "categorias": [
+    { "liga": "lnbp", "categoria": "Puntos", "abrev": "PPJ", "jugadores": [
+      { "nombre": "Jugador Uno", "equipo": "Astros de Jalisco", "valor": 24.6 },
+      { "nombre": "Jugador Dos", "equipo": "Soles de Mexicali", "valor": 22.1 },
+      { "nombre": "Jugador Tres", "equipo": "Lobos Puebla", "valor": 20.8 }
+    ]},
+    { "liga": "lnbp", "categoria": "Rebotes", "abrev": "RPJ", "jugadores": [
+      { "nombre": "Jugador Cuatro", "equipo": "Fuerza Regia", "valor": 11.4 },
+      { "nombre": "Jugador Cinco", "equipo": "Abejas de León", "valor": 10.2 },
+      { "nombre": "Jugador Seis", "equipo": "Mineros de Zacatecas", "valor": 9.7 }
+    ]},
+    { "liga": "lnbp", "categoria": "Asistencias", "abrev": "APJ", "jugadores": [
+      { "nombre": "Jugador Siete", "equipo": "Dorados de Chihuahua", "valor": 8.3 },
+      { "nombre": "Jugador Ocho", "equipo": "Astros de Jalisco", "valor": 7.5 },
+      { "nombre": "Jugador Nueve", "equipo": "Santos del Potosí", "valor": 6.9 }
+    ]}
+  ]
+}
