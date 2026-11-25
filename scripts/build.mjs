@@ -277,7 +277,7 @@ fs.cpSync(path.join(ROOT, 'public'), DIST, { recursive: true });
 
 // Portada
 {
-  const destacadas = noticias.filter((n) => n.destacado).slice(0, 5);
+  const destacadas = noticias.filter((n) => n.destacado).sort((a, b) => (b.principal ? 1 : 0) - (a.principal ? 1 : 0)).slice(0, 5);
   const principal = destacadas[0] || noticias[0];
   const relacionadas = destacadas.slice(1, 5);
   const titulares = noticias.filter((n) => n !== principal).slice(0, 8);
