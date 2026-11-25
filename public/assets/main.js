@@ -35,3 +35,31 @@ document.querySelectorAll('[data-buscar]').forEach((input) => {
     });
   });
 });
+
+// Menú por deporte: clic abre/cierra (táctil y móvil); en escritorio también abre al pasar el mouse
+const esMovil = () => window.matchMedia('(max-width: 1180px)').matches;
+document.querySelectorAll('.mm').forEach((mm) => {
+  const btn = mm.querySelector('.mm-btn');
+  btn.addEventListener('click', (ev) => {
+    const tactil = window.matchMedia('(hover: none)').matches;
+    if (!esMovil() && !tactil) return; // en escritorio con mouse el enlace lleva a la portada del deporte
+    if (!mm.classList.contains('abierto')) {
+      ev.preventDefault();
+      document.querySelectorAll('.mm.abierto').forEach((o) => { if (o !== mm) { o.classList.remove('abierto'); o.querySelector('.mm-btn').setAttribute('aria-expanded', 'false'); } });
+      mm.classList.add('abierto');
+      btn.setAttribute('aria-expanded', 'true');
+    } else if (esMovil()) {
+      ev.preventDefault();
+      mm.classList.remove('abierto');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  mm.addEventListener('mouseenter', () => btn.setAttribute('aria-expanded', 'true'));
+  mm.addEventListener('mouseleave', () => btn.setAttribute('aria-expanded', 'false'));
+});
+document.addEventListener('click', (ev) => {
+  if (!ev.target.closest('.mm')) document.querySelectorAll('.mm.abierto').forEach((o) => o.classList.remove('abierto'));
+});
+document.addEventListener('keydown', (ev) => {
+  if (ev.key === 'Escape') document.querySelectorAll('.mm.abierto').forEach((o) => o.classList.remove('abierto'));
+});

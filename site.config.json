@@ -9,32 +9,27 @@
       "url": "/juegos/"
     },
     {
-      "titulo": "Calendario",
-      "url": "/calendario/"
+      "titulo": "Básquetbol",
+      "url": "/basquetbol/",
+      "seccion": "basquetbol"
     },
     {
-      "titulo": "Ver",
-      "url": "/ver/"
+      "titulo": "Voleibol",
+      "url": "/voleibol/",
+      "seccion": "voleibol"
+    },
+    {
+      "titulo": "F. Americano",
+      "url": "/futbol-americano/",
+      "seccion": "futbol-americano"
     },
     {
       "titulo": "Noticias",
       "url": "/noticias/"
     },
     {
-      "titulo": "Estadísticas",
-      "url": "/estadisticas/"
-    },
-    {
-      "titulo": "Posiciones",
-      "url": "/posiciones/"
-    },
-    {
-      "titulo": "Ligas",
-      "url": "/ligas/"
-    },
-    {
-      "titulo": "Jugadores",
-      "url": "/jugadores/"
+      "titulo": "Ver",
+      "url": "/ver/"
     },
     {
       "titulo": "Picks",
@@ -46,6 +41,35 @@
     }
   ],
   "pie": [
+    {
+      "titulo": "Secciones",
+      "enlaces": [
+        {
+          "titulo": "Juegos",
+          "url": "/juegos/"
+        },
+        {
+          "titulo": "Calendario",
+          "url": "/calendario/"
+        },
+        {
+          "titulo": "Posiciones",
+          "url": "/posiciones/"
+        },
+        {
+          "titulo": "Estadísticas",
+          "url": "/estadisticas/"
+        },
+        {
+          "titulo": "Jugadores",
+          "url": "/jugadores/"
+        },
+        {
+          "titulo": "Ligas",
+          "url": "/ligas/"
+        }
+      ]
+    },
     {
       "titulo": "14 Segundos",
       "enlaces": [
@@ -119,5 +143,28 @@
       "red": "YouTube",
       "url": "https://www.youtube.com/@14segundossports"
     }
-  ]
+  ],
+  "secciones": {
+    "basquetbol": {
+      "nombre": "Básquetbol",
+      "grupos": [
+        "México",
+        "Internacional"
+      ]
+    },
+    "voleibol": {
+      "nombre": "Voleibol",
+      "grupos": [
+        "Femenil",
+        "Varonil"
+      ]
+    },
+    "futbol-americano": {
+      "nombre": "Fútbol americano",
+      "grupos": [
+        "México",
+        "Internacional"
+      ]
+    }
+  }
 }
