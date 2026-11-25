@@ -1,82 +1,21 @@
 [
-  {
-    "id": "lnbp",
-    "nombre": "LNBP",
-    "nombreLargo": "Liga Nacional de Baloncesto Profesional",
-    "deporte": "Básquetbol",
-    "color": "#e4002b",
-    "picks": false
-  },
-  {
-    "id": "nba",
-    "nombre": "NBA",
-    "nombreLargo": "National Basketball Association",
-    "deporte": "Básquetbol",
-    "color": "#1d428a",
-    "picks": true
-  },
-  {
-    "id": "g-league",
-    "nombre": "G League",
-    "nombreLargo": "NBA G League",
-    "deporte": "Básquetbol",
-    "color": "#c8102e",
-    "picks": true
-  },
-  {
-    "id": "abe",
-    "nombre": "ABE",
-    "nombreLargo": "Asociación de Baloncesto Estudiantil",
-    "deporte": "Básquetbol",
-    "color": "#0a7d3b",
-    "picks": false
-  },
-  {
-    "id": "liga-14-segundos",
-    "nombre": "Liga 14 Segundos",
-    "nombreLargo": "Liga Catorce Segundos",
-    "deporte": "Básquetbol",
-    "color": "#ff6b00",
-    "picks": false
-  },
-  {
-    "id": "3x3",
-    "nombre": "3x3",
-    "nombreLargo": "Eventos 3x3 Catorce Segundos Sports",
-    "deporte": "Básquetbol 3x3",
-    "color": "#7a3cff",
-    "picks": false
-  },
-  {
-    "id": "ultimate",
-    "nombre": "Ultimate",
-    "nombreLargo": "Juegos Ultimate",
-    "deporte": "Básquetbol",
-    "color": "#111827",
-    "picks": false
-  },
-  {
-    "id": "puebleadas",
-    "nombre": "Puebleadas",
-    "nombreLargo": "Puebleadas (Pinotepa y más)",
-    "deporte": "Básquetbol",
-    "color": "#b45309",
-    "picks": false
-  },
-  {
-    "id": "voleibol",
-    "nombre": "Voleibol",
-    "nombreLargo": "Liga de Voleibol Profesional de México (LVP MX)",
-    "deporte": "Voleibol",
-    "color": "#0891b2",
-    "picks": false
-  },
-  {
-    "id": "onefa",
-    "nombre": "ONEFA",
-    "nombreLargo": "Organización Nacional Estudiantil de Fútbol Americano",
-    "deporte": "Fútbol americano",
-    "color": "#334155",
-    "picks": false
-  }
+  { "id": "lnbp", "nombre": "LNBP", "nombreLargo": "Liga Nacional de Baloncesto Profesional", "abrev": "LNBP", "deporte": "Básquetbol", "seccion": "basquetbol", "grupo": "México", "color": "#e4002b", "picks": false },
+  { "id": "cibacopa", "nombre": "CIBACOPA", "nombreLargo": "Circuito de Baloncesto de la Costa del Pacífico", "abrev": "CBC", "deporte": "Básquetbol", "seccion": "basquetbol", "grupo": "México", "color": "#0e7490", "picks": false },
+  { "id": "liga-14-segundos", "nombre": "Liga 14 Segundos", "nombreLargo": "Liga Catorce Segundos", "abrev": "14", "deporte": "Básquetbol", "seccion": "basquetbol", "grupo": "México", "color": "#ff6b00", "picks": false },
+  { "id": "abe", "nombre": "ABE", "nombreLargo": "Asociación de Baloncesto Estudiantil", "abrev": "ABE", "deporte": "Básquetbol", "seccion": "basquetbol", "grupo": "México", "color": "#0a7d3b", "picks": false },
+  { "id": "3x3", "nombre": "3x3", "nombreLargo": "Eventos 3x3 Catorce Segundos Sports", "abrev": "3x3", "deporte": "Básquetbol 3x3", "seccion": "basquetbol", "grupo": "México", "color": "#7a3cff", "picks": false },
+  { "id": "ultimate", "nombre": "Ultimate", "nombreLargo": "Juegos Ultimate", "abrev": "UBA", "deporte": "Básquetbol", "seccion": "basquetbol", "grupo": "México", "color": "#b8860b", "picks": false },
+  { "id": "puebleadas", "nombre": "Puebleadas", "nombreLargo": "Puebleadas (Pinotepa y más)", "abrev": "PUE", "deporte": "Básquetbol", "seccion": "basquetbol", "grupo": "México", "color": "#b45309", "picks": false },
+  { "id": "nba", "nombre": "NBA", "nombreLargo": "National Basketball Association", "abrev": "NBA", "deporte": "Básquetbol", "seccion": "basquetbol", "grupo": "Internacional", "color": "#1d428a", "picks": true },
+  { "id": "g-league", "nombre": "G League", "nombreLargo": "NBA G League", "abrev": "GL", "deporte": "Básquetbol", "seccion": "basquetbol", "grupo": "Internacional", "color": "#c8102e", "picks": true },
+  { "id": "wnba", "nombre": "WNBA", "nombreLargo": "Women's National Basketball Association", "abrev": "W", "deporte": "Básquetbol", "seccion": "basquetbol", "grupo": "Internacional", "color": "#f57b20", "picks": false },
+  { "id": "euroliga", "nombre": "EuroLiga", "nombreLargo": "EuroLeague", "abrev": "EL", "deporte": "Básquetbol", "seccion": "basquetbol", "grupo": "Internacional", "color": "#ea580c", "picks": false },
+  { "id": "acb", "nombre": "Liga ACB", "nombreLargo": "Liga ACB (España)", "abrev": "ACB", "deporte": "Básquetbol", "seccion": "basquetbol", "grupo": "Internacional", "color": "#003da5", "picks": false },
+  { "id": "lvp-femenil", "nombre": "LVP MX Femenil", "nombreLargo": "Liga de Voleibol Profesional de México · Femenil", "abrev": "LVP", "deporte": "Voleibol", "seccion": "voleibol", "grupo": "Femenil", "color": "#db2777", "picks": false, "nota": "Campeón 2026: Coronelas de Durango" },
+  { "id": "lvp-varonil", "nombre": "LVP MX Varonil", "nombreLargo": "Liga de Voleibol Profesional de México · Varonil", "abrev": "LVP", "deporte": "Voleibol", "seccion": "voleibol", "grupo": "Varonil", "color": "#0891b2", "picks": false, "nota": "Temporada inaugural · final el 20 de diciembre",
+    "equipos": ["Ángeles de la Ciudad de México", "Aztecas VTY", "Daneses Dorados de Morelos", "Dragones de Querétaro", "Tapatíos de Guadalajara"] },
+  { "id": "vnl-femenil", "nombre": "VNL Femenil", "nombreLargo": "Liga de Naciones de Voleibol FIVB · Femenil", "abrev": "VNL", "deporte": "Voleibol", "seccion": "voleibol", "grupo": "Femenil", "color": "#9d174d", "picks": false },
+  { "id": "vnl-varonil", "nombre": "VNL Varonil", "nombreLargo": "Liga de Naciones de Voleibol FIVB · Varonil", "abrev": "VNL", "deporte": "Voleibol", "seccion": "voleibol", "grupo": "Varonil", "color": "#155e75", "picks": false },
+  { "id": "onefa", "nombre": "ONEFA", "nombreLargo": "Organización Nacional Estudiantil de Fútbol Americano", "abrev": "ONF", "deporte": "Fútbol americano", "seccion": "futbol-americano", "grupo": "México", "color": "#334155", "picks": false },
+  { "id": "nfl", "nombre": "NFL", "nombreLargo": "National Football League", "abrev": "NFL", "deporte": "Fútbol americano", "seccion": "futbol-americano", "grupo": "Internacional", "color": "#013369", "picks": false }
 ]

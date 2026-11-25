@@ -198,6 +198,25 @@ const redirWP = (() => {
   return `<script>(function(){var m=${JSON.stringify(mapa)};var q=location.search.slice(1).split('&');for(var i=0;i<q.length;i++){if(m[q[i]]){location.replace(document.querySelector('link[rel=icon]').href.split('assets/favicon.svg')[0]+m[q[i]].slice(1));return;}}})();</script>`;
 })();
 
+// ---------- Menú por deporte (estilo ESPN) ----------
+const ligaIcono = (l) => `<span class="lg-ico" style="--c:${l.color}">${e(l.abrev || l.nombre.slice(0, 3))}</span>`;
+function megaMenu(m) {
+  const sec = site.secciones?.[m.seccion];
+  const ls = ligas.filter((l) => l.seccion === m.seccion);
+  const grupos = (sec?.grupos || [...new Set(ls.map((l) => l.grupo))]).map((g) => [g, ls.filter((l) => l.grupo === g)]).filter(([, x]) => x.length);
+  const base = m.url;
+  const accesos = [['Portada', base], ['Resultados', base + '#resultados'], ['Calendario', base + '#calendario'], ['Posiciones', base + '#posiciones'], ['Estadísticas', base + '#estadisticas'], ['Ligas', base + '#ligas']];
+  return `<div class="mm">
+    <a class="mm-btn" href="${base}" aria-haspopup="true" aria-expanded="false">${e(m.titulo)}<span class="chev" aria-hidden="true"></span></a>
+    <div class="mm-panel" role="menu">
+      <div class="mm-accesos">${accesos.map(([t, u]) => `<a href="${u}">${t}</a>`).join('')}</div>
+      <div class="mm-grupos" style="--cols:${grupos.length}">
+        ${grupos.map(([g, xs]) => `<div class="mm-grupo"><h4>${e(g)}</h4>${xs.map((l) => `<a class="mm-liga" href="/ligas/${l.id}/">${ligaIcono(l)}<span><b>${e(l.nombre)}</b>${l.nota ? `<small>${e(l.nota)}</small>` : ''}</span></a>`).join('')}</div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+}
+
 // ---------- Layout ----------
 function layout({ titulo, descripcion, contenido, ruta = '/', clase = '' }) {
   const t = titulo ? `${titulo} | ${site.nombre}` : `${site.nombre} · ${site.lema}`;
@@ -239,7 +258,7 @@ ${ticker ? `<div class="ticker" aria-label="Marcadores">
   <div class="wrap top-in">
     <a class="logo" href="/" aria-label="${e(site.nombre)}, inicio"><img class="logo-img" src="/img/marca/logo-14-blanco.png" alt="14 Segundos Sports" width="137" height="173"><span class="lt">SEGUNDOS<small>SPORTS</small></span></a>
     <button class="burger" aria-label="Menú" aria-expanded="false" aria-controls="menu">☰</button>
-    <nav id="menu" class="menu">${site.menu.map((m) => `<a href="${m.url}"${activo(m.url)}>${e(m.titulo)}</a>`).join('')}</nav>
+    <nav id="menu" class="menu">${site.menu.map((m) => (m.seccion ? megaMenu(m).replace('class="mm-btn"', `class="mm-btn${ruta.startsWith(m.url) ? ' on' : ''}"`) : `<a href="${m.url}"${activo(m.url)}>${e(m.titulo)}</a>`)).join('')}</nav>
   </div>
 </header>
 <main id="contenido">
@@ -433,6 +452,38 @@ function pickCard(p) {
   escribir('/posiciones/', layout({ titulo: 'Posiciones', contenido, ruta: '/posiciones/' }));
 }
 
+// Portadas por deporte: /basquetbol/, /voleibol/, /futbol-americano/
+for (const [id, sec] of Object.entries(site.secciones || {})) {
+  const ls = ligas.filter((l) => l.seccion === id);
+  const ids = new Set(ls.map((l) => l.id));
+  const ns = noticias.filter((n) => ids.has(n.liga));
+  const js = juegosData.juegos.filter((j) => ids.has(j.liga));
+  const finales = js.filter((j) => j.estado !== 'programado').sort((a, b) => b.fecha.localeCompare(a.fecha)).slice(0, 8);
+  const prox = js.filter((j) => j.estado === 'programado').sort((a, b) => a.fecha.localeCompare(b.fecha));
+  const tablas = posicionesData.tablas.filter((t) => ids.has(t.liga));
+  const lid = lideresData.categorias.filter((c) => ids.has(c.liga));
+  const grupos = (sec.grupos || []).map((g) => [g, ls.filter((l) => l.grupo === g)]).filter(([, x]) => x.length);
+  const principal = ns.find((n) => n.destacado) || ns[0];
+  const vacio = (t) => `<p class="vacio">${t}</p>`;
+  const contenido = cabecera(e(sec.nombre), `Noticias, resultados, calendario y posiciones de ${e(sec.nombre.toLowerCase())}`) + `<div class="wrap">
+    <nav class="subnav">${['resultados', 'calendario', 'noticias', 'posiciones', 'estadisticas', 'ligas'].map((a) => `<a href="#${a}">${{ resultados: 'Resultados', calendario: 'Calendario', noticias: 'Noticias', posiciones: 'Posiciones', estadisticas: 'Estadísticas', ligas: 'Ligas' }[a]}</a>`).join('')}</nav>
+    ${principal ? `<div class="hero-main sec">${tarjetaNota(principal, true)}</div>` : ''}
+    <div class="dos">
+      <div>
+        <div id="noticias">${seccion('Noticias', ns.length ? `<div class="lista">${ns.filter((n) => n !== principal).slice(0, 8).map((n) => tarjetaNota(n)).join('') || ''}</div>` : vacio('Muy pronto: noticias de esta sección.'), '/noticias/')}</div>
+      </div>
+      <aside>
+        <div id="resultados">${seccion('Resultados', finales.length ? `<div class="scores col">${finales.map((j) => marcador(j)).join('')}</div>` : vacio('Sin resultados recientes.'), '/juegos/')}</div>
+      </aside>
+    </div>
+    <div id="calendario">${seccion('Calendario', prox.length ? `<table class="cal"><tbody>${prox.map((j) => `<tr><td class="hr">${e(j.hora || '')}</td><td>${badge(j.liga)}</td><td class="izq"><b>${e(j.visita.nombre)}</b> @ <b>${e(j.local.nombre)}</b><small>${fechaLarga(j.fecha)}${j.fase ? ' · ' + e(j.fase) : ''}</small></td></tr>`).join('')}</tbody></table>` : vacio('Sin partidos programados por ahora.'), '/calendario/')}</div>
+    <div id="posiciones">${seccion('Posiciones', tablas.length ? tablas.map((t) => `<h3 class="sub">${e(ligaById[t.liga]?.nombre)}</h3><div class="tablas">${tablaPosiciones(t)}</div>`).join('') : vacio('Muy pronto: tablas con datos oficiales.'), '/posiciones/')}</div>
+    <div id="estadisticas">${seccion('Estadísticas', lid.length ? `<div class="lideres">${lid.map(bloqueLideres).join('')}</div>` : vacio('Muy pronto: líderes estadísticos con datos oficiales.'), '/estadisticas/')}</div>
+    <div id="ligas">${seccion('Ligas', grupos.map(([g, xs]) => `<h3 class="sub">${e(g)}</h3><div class="ligas">${xs.map((l) => `<a class="liga" href="/ligas/${l.id}/" style="--c:${l.color}"><b>${e(l.nombre)}</b><span>${e(l.nombreLargo)}</span></a>`).join('')}</div>`).join(''))}</div>
+  </div>`;
+  escribir(`/${id}/`, layout({ titulo: sec.nombre, descripcion: `${sec.nombre}: noticias, resultados y posiciones.`, contenido, ruta: `/${id}/` }));
+}
+
 // Ligas (índice + cada liga)
 {
   const porDeporte = groupBy(ligas, (l) => l.deporte);
@@ -448,7 +499,7 @@ function pickCard(p) {
     const lid = lideresData.categorias.filter((c) => c.liga === l.id);
     const vs = videosData.videos.filter((v) => v.liga === l.id);
     const vacio = !ns.length && !js.length && !tabla && !lid.length && !vs.length;
-    const contenido = `<div class="cab liga-cab" style="--c:${l.color}"><div class="wrap"><p class="dep">${e(l.deporte)}</p><h1>${e(l.nombre)}</h1><p>${e(l.nombreLargo)}</p></div></div>
+    const contenido = `<div class="cab liga-cab" style="--c:${l.color}"><div class="wrap"><p class="dep">${e(l.deporte)}</p><h1>${e(l.nombre)}</h1><p>${e(l.nombreLargo)}</p>${l.nota ? `<p class="dep">${e(l.nota)}</p>` : ''}</div></div>
     <div class="wrap">
       ${js.length ? seccion('Juegos', `<div class="scores">${js.map((j) => marcador(j)).join('')}</div>`, '/juegos/') : ''}
       <div class="dos">
@@ -457,7 +508,8 @@ function pickCard(p) {
         <aside>${tabla ? seccion('Posiciones', tablaPosiciones(tabla)) : ''}
                ${lid.length ? seccion('Líderes', `<div class="lideres">${lid.map(bloqueLideres).join('')}</div>`) : ''}</aside>
       </div>
-      ${vacio ? '<p class="vacio">Muy pronto: noticias, resultados y estadísticas de esta liga.</p>' : ''}
+      ${l.equipos?.length ? seccion('Equipos', `<div class="equipos">${l.equipos.map((x) => `<div class="equipo"><span class="av">${e(x.split(' ').filter((w) => w.length > 2).map((w) => w[0]).join('').slice(0, 2))}</span>${e(x)}</div>`).join('')}</div>`) : ''}
+      ${vacio && !l.equipos?.length ? '<p class="vacio">Muy pronto: noticias, resultados y estadísticas de esta liga.</p>' : ''}
       ${!l.picks ? '' : `<p class="nota-picks">Consulta los <a href="/picks/">picks de ${e(l.nombre)}</a>.</p>`}
     </div>`;
     escribir(`/ligas/${l.id}/`, layout({ titulo: l.nombreLargo, contenido, ruta: `/ligas/${l.id}/` }));

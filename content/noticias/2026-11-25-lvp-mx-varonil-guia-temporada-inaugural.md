@@ -1,7 +1,7 @@
 ---
 titulo: "LVP MX varonil: guía de la primera temporada del voleibol profesional mexicano"
 fecha: 2026-11-25
-liga: voleibol
+liga: lvp-varonil
 resumen: Cinco equipos, cinco estados y un primer campeón que se conocerá el 20 de diciembre. Así se juega la liga.
 autor: Redacción 14 Segundos
 categoria: Guía

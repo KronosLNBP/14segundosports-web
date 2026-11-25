@@ -13,7 +13,8 @@ Generador estático propio, **sin dependencias**: solo Node 18+. No agregues paq
 | Notas | `content/noticias/AAAA-MM-DD-slug.md` |
 | Páginas (Nosotros, Servicios, CEO…) | `content/paginas/slug.md` |
 | Menú, pie, redes | `site.config.json` |
-| Ligas (nombre, color, si permite picks) | `data/ligas.json` |
+| Ligas (nombre, color, si permite picks, sección y grupo del menú) | `data/ligas.json` |
+| Menú desplegable por deporte | `site.config.json` → `menu[].seccion` y `secciones` (grupos/columnas) |
 | Marcadores y calendario | `data/juegos.json` |
 | Tablas de posiciones | `data/posiciones.json` |
 | Líderes estadísticos | `data/lideres.json` |
@@ -40,6 +41,9 @@ Texto en Markdown. Embeds en su propia línea: {{youtube ID}}  {{tiktok URL}}
 Tablas (box score):  | Equipo | P1 | P2 | ... |  seguida de  |---|---|
 ```
 Campos extra: `fuente:` (p. ej. "Prensa Dorados" cuando es un comunicado), `wp_id:` (id de la nota en el WordPress viejo, para redirigir enlaces antiguos).
+
+## Menú por deporte
+Básquetbol, Voleibol y F. Americano abren un menú desplegable (estilo ESPN) con accesos (Portada, Resultados, Calendario, Posiciones, Estadísticas, Ligas) y las ligas agrupadas por `grupo` (México/Internacional, Femenil/Varonil). Cada sección tiene su portada en `/basquetbol/`, `/voleibol/`, `/futbol-americano/`. Para agregar una liga basta con añadirla en `data/ligas.json` con `seccion` y `grupo`.
 
 ## Hosting
 GitHub Pages con GitHub Actions (`.github/workflows/pages.yml`): cada push a `main` construye y publica. Los PR solo corren la revisión del build (`build.yml`).
