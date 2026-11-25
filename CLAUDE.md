@@ -32,6 +32,7 @@ resumen: Una o dos líneas para portada y redes.
 autor: Redacción 14 Segundos
 categoria: Movimientos   # opcional (p. ej. "Negocio del deporte")
 destacado: true          # opcional: entra al carrusel principal
+principal: true          # opcional: fuerza la nota como portada principal (usar en una sola)
 imagen: /img/2026/astros.jpg   # opcional, imágenes en public/img/
 borrador: true           # opcional: no se publica
 ---
